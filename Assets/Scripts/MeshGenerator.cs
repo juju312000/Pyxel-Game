@@ -28,9 +28,9 @@ public class MeshGenerator : MonoBehaviour
 
         //m_Mf.sharedMesh = GenerateCylinder(40, 10, 2, 6, (kx,kZ)=>m_GlassProfile.Evaluate(kZ));
 
-        m_Mf.sharedMesh = GenerateTerrainFromHeightFunction(300, 300, new Vector3(10, 3, 10),
-            (kX, kZ) => m_HeightMap.GetPixel((int)(kX * m_HeightMap.width), (int)(kZ * m_HeightMap.height)).grayscale
-            );
+        //m_Mf.sharedMesh = GenerateTerrainFromHeightFunction(300, 300, new Vector3(10, 3, 10),
+         //   (kX, kZ) => m_HeightMap.GetPixel((int)(kX * m_HeightMap.width), (int)(kZ * m_HeightMap.height)).grayscale
+         //   );
         gameObject.AddComponent<MeshCollider>();
     }
 
@@ -49,7 +49,6 @@ public class MeshGenerator : MonoBehaviour
         ComputeVertexPos cylFunc = (kX, kZ) =>
                                 CoordConvert.CylindricalToCartesian(new Cylindrical(radius * rhoFunc(kX, kZ), kX * Mathf.PI * 2, height * kZ));
         return GeneratePlane(nSegmentsTheta, nSegmentsY, cylFunc);
-
     }
 
     Mesh GenerateTriangle()
@@ -178,7 +177,6 @@ public class MeshGenerator : MonoBehaviour
             int indexOffset = i * (nSegmentsZ + 1);
 
             for (int j = 0; j < nSegmentsZ + 1; j++)
-
             {
                 float kZ = (float)j / nSegmentsZ; // ratio
 
