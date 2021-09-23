@@ -47,6 +47,9 @@ public class PlanetGenerator : MonoBehaviour
 
     [SerializeField] int m_SpherifiedCubeNDivisions;
     [SerializeField] int m_SpherifiedCubeRadius;
+    [SerializeField] Texture2D m_HeightMap;
+    [SerializeField] Texture2D m_Color;
+
 
     private void Awake()
     {
@@ -145,6 +148,7 @@ public class PlanetGenerator : MonoBehaviour
 
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
+        GetComponent<Renderer>().material.mainTexture = m_Color;
         return mesh;
     }
 

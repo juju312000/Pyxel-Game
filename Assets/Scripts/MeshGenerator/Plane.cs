@@ -10,12 +10,13 @@ public class Plane : MonoBehaviour
     MeshFilter m_Mf;
     delegate Vector3 ComputeVertexPos(float k1, float k2);
     // Start is called before the first frame update
+    [SerializeField] Vector3 sizePlane;
 
     private void Awake()
     {
         m_Mf = GetComponent<MeshFilter>();
 
-        Vector3 halfSize = new Vector3(4, 0, 2);
+        Vector3 halfSize = sizePlane;
         m_Mf.sharedMesh = GeneratePlane(20, 10, (kX, kZ) => new Vector3(Mathf.Lerp(-halfSize.x, halfSize.x, kX),
                                                        0,
                                                        Mathf.Lerp(-halfSize.z, halfSize.z, kZ)));
