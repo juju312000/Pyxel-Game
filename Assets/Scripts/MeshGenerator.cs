@@ -21,16 +21,23 @@ public class MeshGenerator : MonoBehaviour
         //m_Mf.sharedMesh = GenerateQuad(new Vector3(4,0,2));
         //m_Mf.sharedMesh = GenerateStrip(new Vector3(4, 0, 2),10, k=>.125f*Mathf.Sin(k*Mathf.PI*2*4) );
 
-        //Vector3 halfSize = new Vector3(4, 0, 2);
-        //m_Mf.sharedMesh = GeneratePlane( 20,10, (kX,kZ) => new Vector3(Mathf.Lerp(-halfSize.x, halfSize.x, kX),
-        //                                               0,
-        //                                               Mathf.Lerp(-halfSize.z, halfSize.z, kZ)));//);// .125f * Mathf.Sin(kX* Mathf.PI * 2 * 4) * Mathf.Cos(kZ * Mathf.PI * 2 * 4));
+        Vector3 halfSize = new Vector3(5*0.5f, 0, 5*0.5f);
+
+        m_Mf.sharedMesh = GeneratePlane(5, 5, (kX, kZ) => new Vector3(Mathf.Lerp(-halfSize.x, halfSize.x, kX),
+                                                       0,
+                                                       Mathf.Lerp(-halfSize.z, halfSize.z, kZ)));
+
+        m_Mf.sharedMesh = GeneratePlane( 5,5, (kX,kZ) => new Vector3(Mathf.Lerp(-halfSize.x, halfSize.x, kX),
+                                                       0,
+                                                       Mathf.Lerp(-halfSize.z, halfSize.z, kZ)));//);// .125f * Mathf.Sin(kX* Mathf.PI * 2 * 4) * Mathf.Cos(kZ * Mathf.PI * 2 * 4));
 
         //m_Mf.sharedMesh = GenerateCylinder(40, 10, 2, 6, (kx,kZ)=>m_GlassProfile.Evaluate(kZ));
 
-        m_Mf.sharedMesh = GenerateTerrainFromHeightFunction(300, 300, new Vector3(10, 3, 10),
-            (kX, kZ) => m_HeightMap.GetPixel((int)(kX * m_HeightMap.width), (int)(kZ * m_HeightMap.height)).grayscale
-            );
+
+
+        //m_Mf.sharedMesh = GenerateTerrainFromHeightFunction(300, 300, new Vector3(10, 3, 10),
+        //    (kX, kZ) => m_HeightMap.GetPixel((int)(kX * m_HeightMap.width), (int)(kZ * m_HeightMap.height)).grayscale
+        //    );
         gameObject.AddComponent<MeshCollider>();
     }
 
