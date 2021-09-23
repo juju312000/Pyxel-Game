@@ -83,8 +83,8 @@ public class Sphere : MonoBehaviour
         mesh.uv = uv;
         //mesh.normals = normals;
 
-        //mesh.RecalculateNormals();
-        //mesh.RecalculateBounds();
+        mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
 
         return mesh;
     }
