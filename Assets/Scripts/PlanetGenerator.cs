@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 #if UNITY_EDITOR
@@ -47,12 +47,15 @@ public class PlanetGenerator : MonoBehaviour
 
     [SerializeField] int m_SpherifiedCubeNDivisions;
     [SerializeField] int m_SpherifiedCubeRadius;
+    [SerializeField] Texture2D m_HeightMap;
+    [SerializeField] Texture2D m_Color;
+
 
     private void Awake()
     {
         m_MeshFilter = GetComponent<MeshFilter>();
 
-        m_MeshFilter.sharedMesh = PlainSpherifiedCube(m_SpherifiedCubeNDivisions, m_SpherifiedCubeRadius);
+        m_MeshFilter.sharedMesh =    PlainSpherifiedCube(m_SpherifiedCubeNDivisions, m_SpherifiedCubeRadius);
     }
 
     Vector3 Mult(Vector3 a, Vector3 b)
@@ -60,7 +63,7 @@ public class PlanetGenerator : MonoBehaviour
         return new Vector3(a.x * b.x, a.y * b.y, a.z * b.z);
     }
 
-    Mesh PlainSpherifiedCube(int divisions, float radius)
+    Mesh PlainSpherifiedCube(int divisions,float radius)
     // https://github.com/caosdoar/spheres/blob/master/src/spheres.cpp
     {
         Mesh mesh = new Mesh();
@@ -145,6 +148,7 @@ public class PlanetGenerator : MonoBehaviour
 
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
+        GetComponent<Renderer>().material.mainTexture = m_Color;
         return mesh;
     }
 
