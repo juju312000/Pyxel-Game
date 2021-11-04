@@ -868,6 +868,7 @@ Transform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 --- !u!1 &1927618583
 GameObject:
@@ -1074,3 +1075,5 @@ PrefabInstance:
 >>>>>>> a41fe63fc6eff1933f93cf4177799c63a69be762
 =======
 >>>>>>> parent of a41fe63 (tree)
+=======
+>>>>>>> parent of 0cd358d (Merge branch 'main' of https://github.com/juju312000/Pyxel-Game into main)
