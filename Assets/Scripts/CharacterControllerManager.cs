@@ -11,6 +11,9 @@ public class CharacterControllerManager : MonoBehaviour,ISpeed
 
     [SerializeField] float m_RotationSpeed;
 
+    [SerializeField] float m_JumpSpeed;
+    float ySpeed ;
+
     public float SpeedRatio { get { return Mathf.Abs(m_TranslationSpeed) / m_MaxTranslationSpeed; } }
 
     private void Awake()
@@ -21,13 +24,33 @@ public class CharacterControllerManager : MonoBehaviour,ISpeed
     // Update is called once per frame
     void Update()
     {
+
+        ySpeed += Physics.gravity.y *Time.deltaTime;
+
+        if (m_CharacterController.isGrounded){
+
+            if(Input.GetButtonDown("Jump"))
+            {
+                ySpeed = m_JumpSpeed;
+            }
+
+        }
+
+        
+        
+
         float hInput = Input.GetAxis("Horizontal");
         float vInput = Input.GetAxis("Vertical");
 
-        m_TranslationSpeed = Mathf.Lerp(-m_MaxTranslationSpeed, m_MaxTranslationSpeed,(vInput+1)*.5f);
+        m_TranslationSpeed = Mathf.Lerp(-m_MaxTranslationSpeed, m_MaxTranslationSpeed,(vInput+1)*0.5f);
 
+        Vector3 velocity = transform.forward * m_TranslationSpeed;
+        velocity.y=ySpeed;
 
-        m_CharacterController.SimpleMove(transform.forward * m_TranslationSpeed);
+        m_CharacterController.Move(velocity*Time.deltaTime);
+
         transform.Rotate(Vector3.up, m_RotationSpeed * Time.deltaTime*hInput);
+
+        
     }
 }
