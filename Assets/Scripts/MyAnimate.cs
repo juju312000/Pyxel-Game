@@ -29,7 +29,7 @@ public class MyAnimate : MonoBehaviour
     void Update()
     {
         //transform.position += new Vector3(4f * Time.deltaTime, 0, 0);
-
+        
         transform.position = m_AnimationMethod(Time.time);
         
     }
