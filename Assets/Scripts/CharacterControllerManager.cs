@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 public class CharacterControllerManager : MonoBehaviour,ISpeed
@@ -24,7 +25,10 @@ public class CharacterControllerManager : MonoBehaviour,ISpeed
     // Update is called once per frame
     void Update()
     {
-
+        if (GameObject.Find("Player").transform.position.y < -20)
+        {
+            SceneManager.LoadScene("DefeatMenu");
+        }
         ySpeed += Physics.gravity.y *Time.deltaTime;
 
         if (m_CharacterController.isGrounded){

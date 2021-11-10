@@ -33,5 +33,15 @@ public class AnimationHoriz : MonoBehaviour
         {
                         transform.position= new Vector3(positionInitialex, positionInitialey,positionInitialez +Mathf.PingPong(Time.time * m_Speed, deltaDeplacement)-m_deplacementBas);
         }
+
+        if (m_typeDeDéplacement == 'x')
+        {
+            transform.position = new Vector3(positionInitialex + Mathf.PingPong(Time.time * m_Speed, deltaDeplacement) - m_deplacementBas, positionInitialey, positionInitialez );
+        }
+
+        if (m_typeDeDéplacement == 'y')
+        {
+            transform.position = new Vector3(positionInitialex , positionInitialey + Mathf.PingPong(Time.time * m_Speed, deltaDeplacement) - m_deplacementBas, positionInitialez);
+        }
     }   
 }
