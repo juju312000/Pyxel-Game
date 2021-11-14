@@ -31,7 +31,7 @@ public class AnimationHoriz : MonoBehaviour
     {
         if (m_typeDeDéplacement=='z')
         {
-                        transform.position= new Vector3(positionInitialex, positionInitialey,positionInitialez +Mathf.PingPong(Time.time * m_Speed, deltaDeplacement)-m_deplacementBas);
+            transform.position= new Vector3(positionInitialex, positionInitialey,positionInitialez +Mathf.PingPong(Time.time * m_Speed, deltaDeplacement)-m_deplacementBas);
         }
 
         if (m_typeDeDéplacement == 'x')

@@ -11,27 +11,30 @@ public class MeshGenerator : MonoBehaviour
 
     MeshFilter m_Mf;
 
-    [SerializeField] AnimationCurve m_GlassProfile;
-    [SerializeField] Texture2D m_HeightMap;
+    //[SerializeField] AnimationCurve m_GlassProfile;
+    //[SerializeField] Texture2D m_HeightMap;
+    [SerializeField] float m_longueurOcta;
+
 
     private void Awake()
     {
         m_Mf = GetComponent<MeshFilter>();
+        //m_Mf.sharedMesh = GenerateTriangle();
+        //Vector3 halfSize = new Vector3(5*0.5f, 0, 5*0.5f);
 
-        Vector3 halfSize = new Vector3(5*0.5f, 0, 5*0.5f);
+        //m_Mf.sharedMesh = GeneratePlane(5, 5, (kX, kZ) => new Vector3(Mathf.Lerp(-halfSize.x, halfSize.x, kX),
+        //                                               0,
+        //                                               Mathf.Lerp(-halfSize.z, halfSize.z, kZ)));
 
-        m_Mf.sharedMesh = GeneratePlane(5, 5, (kX, kZ) => new Vector3(Mathf.Lerp(-halfSize.x, halfSize.x, kX),
-                                                       0,
-                                                       Mathf.Lerp(-halfSize.z, halfSize.z, kZ)));
+        //m_Mf.sharedMesh = GeneratePlane( 5,5, (kX,kZ) => new Vector3(Mathf.Lerp(-halfSize.x, halfSize.x, kX),
+        //                                               0,
+        //                                               Mathf.Lerp(-halfSize.z, halfSize.z, kZ)));//);// .125f * Mathf.Sin(kX* Mathf.PI * 2 * 4) * Mathf.Cos(kZ * Mathf.PI * 2 * 4));
 
-        m_Mf.sharedMesh = GeneratePlane( 5,5, (kX,kZ) => new Vector3(Mathf.Lerp(-halfSize.x, halfSize.x, kX),
-                                                       0,
-                                                       Mathf.Lerp(-halfSize.z, halfSize.z, kZ)));//);// .125f * Mathf.Sin(kX* Mathf.PI * 2 * 4) * Mathf.Cos(kZ * Mathf.PI * 2 * 4));
+        //m_Mf.sharedMesh = GenerateCylinder(40, 10, 2, 6, (kx,kZ)=>m_GlassProfile.Evaluate(kZ));
 
-        m_Mf.sharedMesh = GenerateCylinder(40, 10, 2, 6, (kx,kZ)=>m_GlassProfile.Evaluate(kZ));
+        m_Mf.sharedMesh = GenerateOctaedre(m_longueurOcta);
 
-
-        gameObject.AddComponent<MeshCollider>();
+        //gameObject.AddComponent<MeshCollider>();
     }
 
     Mesh GenerateTerrainFromHeightFunction(int nSegmentsX, int nSegmentsZ, Vector3 size, ComputeValueDelegate heightFunc)
@@ -50,6 +53,9 @@ public class MeshGenerator : MonoBehaviour
                                 CoordConvert.CylindricalToCartesian(new Cylindrical(radius * rhoFunc(kX, kZ), kX * Mathf.PI * 2, height * kZ));
         return GeneratePlane(nSegmentsTheta, nSegmentsY, cylFunc);
     }
+
+    
+
 
     Mesh GenerateTriangle()
     {
@@ -98,6 +104,57 @@ public class MeshGenerator : MonoBehaviour
         mesh.triangles = triangles;
 
         return mesh;
+    }
+
+    Mesh GenerateOctaedre(float size)
+    {
+        Mesh mesh = new Mesh();
+        mesh.name = "octaedre";
+
+        Vector3[] vertices = new Vector3[6];
+        int[] triangles = new int[24];
+
+        vertices[0] = new Vector3(0, 0, 0);
+        vertices[1] = new Vector3(size,0 ,0 );
+        vertices[2] = new Vector3(size, 0, size);
+        vertices[3] = new Vector3(0, 0, size);
+        vertices[4] = new Vector3(size * 0.5f, size, size * 0.5f);
+        vertices[5] = new Vector3(size * 0.5f, -size, size * 0.5f);
+        
+        int index = 0;
+        for (int i = 0; i < 3; i++)
+        {   
+            //partie haute
+            triangles[index] = i;
+            triangles[index+1] = 4;
+            triangles[index+2] = i+1;
+            print(i);
+
+            //partie basse
+            triangles[index+3] = i;
+            triangles[index+4] = i+1;
+            triangles[index+5] = 5;
+
+            index = index+6;
+            
+        }
+        // //dernière partie haute
+         triangles[18] = 3;
+         triangles[19] = 4;
+         triangles[20] = 0;
+        // //dernière partie basse
+         triangles[21] = 3;
+         triangles[22] = 0;
+         triangles[23] = 5;   
+
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+
+        mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
+
+        return mesh;
+
     }
 
     Mesh GenerateStrip(Vector3 size, int nSegmentsX, ComputeHeigthXDelegate heightFunction)
