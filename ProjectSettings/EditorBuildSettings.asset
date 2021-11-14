@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 2863b4cdc3a584ceb9e0d8766f92ec82
   - enabled: 1
-    path: Assets/Scenes/cube.unity
+    path: Assets/Scenes/Cube.unity
     guid: b08bfa769c15f5f45943c05e19976dd5
   - enabled: 1
     path: Assets/Scenes/DefeatMenu.unity
