@@ -14,19 +14,19 @@ public class FolowPlatfome : MonoBehaviour
 
         if (col.gameObject.tag == "P" )
         {
-            Debug.Log(col.gameObject.name);
+            //Debug.Log(col.gameObject.name);
             //m_CharacterController.gameObject.transform.SetParent(myCarpet.transform);
             Score.scoreValue = col.gameObject.name;
         }
     }
 
-    void OnCollisionExit(Collision col)
-    {
+    //void OnCollisionExit(Collision col)
+    //{
 
-        if (col.gameObject.tag == "P")
-        {
-            Debug.Log("Leave");
-            m_CharacterController.gameObject.transform.SetParent(null);
-        }
-    }
+        //if (col.gameObject.tag == "P")
+        //{
+            //Debug.Log("Leave");
+           // m_CharacterController.gameObject.transform.SetParent(null);
+       // }
+    //}
 }

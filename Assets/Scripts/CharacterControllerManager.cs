@@ -30,6 +30,10 @@ public class CharacterControllerManager : MonoBehaviour,ISpeed
         {
             SceneManager.LoadScene("DefeatMenu");
         }
+        if (Score.scoreValue == "10")
+        {
+            SceneManager.LoadScene("Win");
+        }
         ySpeed += Physics.gravity.y *Time.deltaTime;
 
         if (m_CharacterController.isGrounded){
