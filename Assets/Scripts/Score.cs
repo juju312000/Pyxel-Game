@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
 public class Score : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
+        if (collision.gameObject.name != null)
+        {
+            Debug.Log("OK");
+        }
     }
 }
