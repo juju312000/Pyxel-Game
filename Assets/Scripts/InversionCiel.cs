@@ -34,6 +34,7 @@ public class InversionCiel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.position = new Vector3(0, -50, 0);
         transform.Rotate(Vector3.up * 5f * Time.deltaTime);
     }
 }

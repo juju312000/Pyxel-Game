@@ -31,6 +31,7 @@ public class MyAnimate : MonoBehaviour
         //transform.position += new Vector3(4f * Time.deltaTime, 0, 0);
         
         transform.position = m_AnimationMethod(Time.time);
-        
+        transform.position = new Vector3(0, -50, 0);
+
     }
 }
