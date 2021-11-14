@@ -8,6 +8,7 @@ public class CharacterControllerManager : MonoBehaviour,ISpeed
 {
     [SerializeField] CharacterController m_CharacterController;
     [SerializeField] float m_MaxTranslationSpeed=10;   //unit: m/s
+
     float m_TranslationSpeed=0;
 
     [SerializeField] float m_RotationSpeed;
@@ -51,10 +52,9 @@ public class CharacterControllerManager : MonoBehaviour,ISpeed
         Vector3 velocity = transform.forward * m_TranslationSpeed;
         velocity.y=ySpeed;
 
-        m_CharacterController.Move(velocity*Time.deltaTime);
 
-        transform.Rotate(Vector3.up, m_RotationSpeed * Time.deltaTime*hInput);
+        m_CharacterController.Move(velocity * Time.deltaTime);
 
-        
+        transform.Rotate(Vector3.up, m_RotationSpeed * Time.deltaTime * hInput);
     }
 }
