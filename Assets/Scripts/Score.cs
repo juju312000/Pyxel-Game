@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Score : MonoBehaviour
 {
-    private void OnCollisionStay(Collision collision)
+    public static string scoreValue = "0";
+
+
+    private void OnGUI()
     {
-        if (collision.gameObject.name != null)
-        {
-            Debug.Log("OK");
-        }
+        GUI.Label(new Rect(20, 20, 200, 40), "Score: " + scoreValue);
     }
 }

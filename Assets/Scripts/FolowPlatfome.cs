@@ -7,23 +7,23 @@ using UnityEngine;
 public class FolowPlatfome : MonoBehaviour
 {
     [SerializeField] CharacterController m_CharacterController;
-    [SerializeField] GameObject myCarpet;
 
 
     void OnCollisionEnter(Collision col)
     {
 
-        if (col.gameObject.name == myCarpet.name)
+        if (col.gameObject.tag == "P" )
         {
             Debug.Log(col.gameObject.name);
-            m_CharacterController.gameObject.transform.SetParent(myCarpet.transform);
+            //m_CharacterController.gameObject.transform.SetParent(myCarpet.transform);
+            Score.scoreValue = col.gameObject.name;
         }
     }
 
     void OnCollisionExit(Collision col)
     {
 
-        if (col.gameObject.name == myCarpet.name)
+        if (col.gameObject.tag == "P")
         {
             Debug.Log("Leave");
             m_CharacterController.gameObject.transform.SetParent(null);
